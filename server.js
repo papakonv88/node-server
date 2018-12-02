@@ -20,6 +20,7 @@ app.set('view engine', 'hbs');
 app.use((req, res, next)=> {
     var now = new Date().toString();
     var log = `${now}: ${req.method} ${req.url}`;
+    console.log(log);
     fs.appendFile('server.log', log + '\r\n', (err) => {
         if (err) {
         console.log('Error in updating log file!');
@@ -36,16 +37,6 @@ app.use(express.static('public'));
 
 
 
-/*app.get('/', (req, res) => {
-    res.send(
-        {name: "Bill",
-         Likes: ["Movies",
-             "Football",
-             "Nature"]
-         }
-    );
-});*/
-
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
        pageTitle: 'About page'
@@ -59,6 +50,12 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs', {
+       welcomeMessage: "Welcome! This is our portfolio page :)",
+       pageTitle: 'Projects page'
+    });
+});
 
 
 app.get('/bad', (req, res) => {
